@@ -1,6 +1,6 @@
-const React = require("react");
-const Layout = require("./Layout");
-const RerPage = require("./RerPage");
+const React = require('react');
+const Layout = require('./Layout');
+const RerPage = require('./RerPage');
 
 module.exports = function Main({ title, user }) {
   return (
