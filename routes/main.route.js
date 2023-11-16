@@ -1,9 +1,7 @@
 /* eslint-disable no-console */
-const router = require('express').Router();
-
-const MainPage = require('../components/MainPage');
-
-router.get('/', (req, res) => {
+const router = require("express").Router();
+const MainPage = require("../components/MainPage");
+router.get("/", (req, res) => {
   try {
     const html = res.renderComponent(MainPage);
     res.send(html);
@@ -11,5 +9,4 @@ router.get('/', (req, res) => {
     res.json(error);
   }
 });
-
 module.exports = router;

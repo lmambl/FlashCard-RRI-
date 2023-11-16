@@ -1,3 +1,5 @@
+
+/* eslint-disable no-console */
 require('@babel/register');
 const express = require('express');
 
