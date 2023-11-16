@@ -1,22 +1,24 @@
-require("@babel/register");
+
 /* eslint-disable no-console */
-const express = require("express");
+require('@babel/register');
+const express = require('express');
 
 const app = express(); // Веб-сервер
+const PORT = process.env.PORT ?? 3000;
+const path = require('path');
 
-const Mainro = require("./routes/main.route");
-const ssr = require("./middleware/ssr");
-
+const indexRouter = require('./routes/index.route');
+const ssr = require('./middleware/ssr');
 
 app.use(ssr);
-app.use("/", Mainro);
 
-const PORT = process.env.PORT ?? 5000;
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("ОПА А ВОТ И СТРАНИЧКА!");
+app.use('/', indexRouter);
+
+app.listen(PORT, async () => {
+  console.log('Запускаемся дядя!', PORT);
 });
 
-app.listen(PORT, () => {
-  console.log("Запускаемся дядя!", PORT);
-});
