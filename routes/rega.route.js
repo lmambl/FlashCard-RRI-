@@ -1,5 +1,7 @@
 const router = require('express').Router();
-const RegPage = require('../components/RegPage');
+const RegPage = require('../components/RerPage');
+const { User } = require('../db/models');
+
 
 router.get('/', (req, res) => {
   try {
@@ -10,5 +12,15 @@ router.get('/', (req, res) => {
   }
 });
 
-module.exports = router;
+router.post('/', async (req, res) => {
+  try {
+    const { name } = req.body;
+    const user = await User.create({ name: name, score: 1000 });
+    res.app.locals.user = user;
+    res.redirect('/category');
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 
+module.exports = router;
