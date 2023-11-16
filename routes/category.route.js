@@ -2,7 +2,8 @@
 const router = require('express').Router();
 
 const categoryPage = require('../components/CategoryPage');
-const { Category } = require('../db/models');
+const { Category, Question } = require('../db/models');
+const QAList = require('../components/QAList');
 
 router.get('/', async (req, res) => {
   try {
@@ -18,6 +19,23 @@ router.get('/', async (req, res) => {
   }
 });
 
+
+router.get('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const questions = await Question.findAll({
+      where: { categotyID: id },
+    });
+    const html = res.renderComponent(QAList, {
+      title: 'QA',
+      questions,
+    });
+    res.status(200).send(html);
+  } catch ({ message }) {
+    console.log(message);
+    res.end();
+  }
+});
 // router.get('/', async (req, res) => {
 //   try {
 //     const cards = await Category.findAll();
@@ -30,4 +48,3 @@ router.get('/', async (req, res) => {
 //   }
 // });
 module.exports = router;
-
