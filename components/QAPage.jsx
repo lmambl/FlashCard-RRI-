@@ -51,6 +51,12 @@ function QAPage({ question, index, title }) {
                       </a>
                     </button>
                   </div>
+                  <div className="pepe">
+          <img src="/img/pepefrg-4.gif" alt="" />
+        </div>
+        <div className="pepe2">
+          <img src="/img/pepefrg-4.gif" alt="" />
+        </div>
                 </div>
               </div>
             </div>

@@ -21,6 +21,12 @@ module.exports = function CategoryPage({ title, user, cards }) {
             <p class="subtitle">Your score: {user.score}</p>
           </div>
         </div>
+        <div className="pepe">
+          <img src="/img/pepefrg-4.gif" alt="" />
+        </div>
+        <div className="pepe2">
+          <img src="/img/pepefrg-4.gif" alt="" />
+        </div>
       </section>
     </Layout>
   );
