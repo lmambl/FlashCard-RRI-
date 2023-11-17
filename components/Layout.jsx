@@ -8,8 +8,8 @@ module.exports = function Layout({ title, children }) {
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css"
         />
+        <script defer src="/script.js" />
         <title>{title}</title>
-        
       </head>
 
       <body>{children}</body>

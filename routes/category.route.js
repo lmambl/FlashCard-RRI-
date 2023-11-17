@@ -1,9 +1,8 @@
 /* eslint-disable no-console */
 const router = require('express').Router();
-
+const { EOL } = require('os');
 const categoryPage = require('../components/CategoryPage');
-const { Category, Question } = require('../db/models');
-const QAList = require('../components/QAList');
+const { Category, Question, User } = require('../db/models');
 const QAPage = require('../components/QAPage');
 
 router.get('/', async (req, res) => {
@@ -20,21 +19,47 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/:id/questions/:qustionId', async (req, res) => {
+router.get('/:id/questions/:index', async (req, res) => {
   try {
-    const { id, qustionId } = req.params;
-    const question = await Question.findOne({
+    const { id, index } = req.params;
+    const questions = await Question.findAll({
       where: { categotyID: id },
-      where: { id: qustionId },
     });
-    const html = res.renderComponent(QAPage, {
-      title: 'QA',
-      question,
-    });
-    res.status(200).send(html);
+    if (Number(index) < questions.length) {
+      const html = res.renderComponent(QAPage, {
+        title: 'QA',
+        question: questions[index],
+        index: Number(index) + 1,
+      });
+      res.status(200).send(html);
+    } else {
+      res.redirect('/category');
+    }
   } catch ({ message }) {
     console.log(message);
     res.end();
   }
 });
+
+router.post('/questions', async (req, res) => {
+  const { id, answer } = req.body;
+  if (res.app.locals.user) {
+    const user = await User.findOne({ where: { id: res.app.locals.user.id } });
+    const a = await Question.findOne({
+      where: { id },
+    });
+    if (answer.toUpperCase().trim() === a.answer) {
+      user.score += 100;
+      await user.save();
+      res.app.locals.user.score = user.score;
+      res.json({ message: 'ОтВеТ ВеРнЫй' });
+    } else {
+      user.score -= 100;
+      await user.save();
+      res.app.locals.user.score = user.score;
+      res.json({ message: `ОтВеТ ! ВеРнЫй${EOL}Верный  ответ: ${a.answer}` });
+    }
+  }
+});
+
 module.exports = router;
