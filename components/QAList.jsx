@@ -14,5 +14,6 @@ function QAList({ questions, title }) {
     </Layout>
   );
 }
+
 module.exports = QAList;
 
