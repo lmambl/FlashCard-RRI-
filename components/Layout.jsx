@@ -9,6 +9,7 @@ module.exports = function Layout({ title, children }) {
           href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css"
         />
         <script defer src="/script.js" />
+        <link rel="stylesheet" href="/style/index.css" />
         <title>{title}</title>
       </head>
 
