@@ -29,6 +29,10 @@ module.exports = (sequelize, DataTypes) => {
           key: 'id',
         },
       },
+      url: {
+        allowNull: false,
+        type: DataTypes.TEXT,
+      },
     },
     {
       sequelize,
