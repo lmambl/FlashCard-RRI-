@@ -6,10 +6,12 @@ module.exports = function CategoryPage({ title, user, cards }) {
   return (
     <Layout title={title} user={user}>
       <section class="hero is-link">
-        <div class="hero-body">
-          <p class="title">Welcome on Quiz, {user.name}!</p>
-          <p class="subtitle">Your score: {user.score}</p>
-        </div>
+        {user && (
+          <div class="hero-body">
+            <p class="title">Welcome on Quiz, {user.name}!</p>
+            <p class="subtitle">Your score: {user.score}</p>
+          </div>
+        )}
       </section>
       <section class="hero is-medium is-link">
         <div class="hero-body ">
