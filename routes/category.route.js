@@ -52,12 +52,16 @@ router.post('/questions', async (req, res) => {
       user.score += 100;
       await user.save();
       res.app.locals.user.score = user.score;
-      res.json({ message: 'ОтВеТ ВеРнЫй' });
+      res.json({
+        message: `${user.name}, ты молодчинка! Держи сотку на мороженку, теперь твой счет равен:${user.score}`,
+      });
     } else {
       user.score -= 100;
       await user.save();
       res.app.locals.user.score = user.score;
-      res.json({ message: `ОтВеТ ! ВеРнЫй${EOL}Верный  ответ: ${a.answer}` });
+      res.json({
+        message: `${user.name}, ты дал неверный ответ!${EOL}Верный  ответ: ${a.answer} С тебя сотка, теперь твой счет равен:${user.score}`,
+      });
     }
   }
 });
