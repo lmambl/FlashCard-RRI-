@@ -7,17 +7,17 @@ module.exports = {
       'Categories',
       [
         {
-          title: 'Категория 1',
+          title: 'Мемы',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          title: 'Категория 2',
+          title: 'Просто Яблоко',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          title: 'Категория 3',
+          title: 'Привычные вещи',
           createdAt: new Date(),
           updatedAt: new Date(),
         },
